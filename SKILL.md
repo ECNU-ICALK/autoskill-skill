@@ -1,6 +1,6 @@
 ---
 name: autoskill
-description: Manage local Agent Skill files as an installable skill manager. Proactively and periodically detect reusable skill material during or after meaningful sessions; run non-blocking extraction checks; score candidates by evidence, recurrence, and value; search similar local skills; then, after explicit user approval, discard, improve, merge, or create `SKILL.md` folders using skill-creator-style conventions. Use when maintaining, deduplicating, extracting, improving, merging, or creating local agent skills.
+description: Manage local Agent Skill files as an installable skill manager. Proactively and periodically detect reusable skill material during or after meaningful sessions; run non-blocking extraction checks; score candidates by evidence, recurrence, and value; search similar local skills; fully draft proposed skills or diffs before asking for approval; then, after explicit user approval, discard, improve, merge, or create `SKILL.md` folders using skill-creator-style conventions. Use when maintaining, deduplicating, extracting, improving, merging, or creating local agent skills.
 ---
 
 # Local Skill File Manager
@@ -65,7 +65,7 @@ The model should proactively initiate scans and extraction checks. Do not ask th
 
 ## Candidate Lifecycle
 
-Keep the lifecycle separate from any particular storage system: observe a signal, draft a candidate, de-duplicate by pattern, decide `discard`/`keep_note`/`improve`/`merge`/`create`, show the confirmation packet, then apply the smallest approved change and validate.
+Keep the lifecycle separate from any particular storage system: observe a signal, draft a candidate, de-duplicate by pattern, decide `discard`/`keep_note`/`improve`/`merge`/`create`, show the complete proposed skill or diff, then apply the smallest approved change and validate.
 
 De-duplicate by task family, trigger, tools, failure mode, output contract, and target skill rather than exact wording. Do not create a private database, daemon, scheduler, or hidden background store as part of this skill.
 
@@ -84,7 +84,7 @@ Skill extraction and maintenance must not block the user's main task.
 
 ## Confirmation Gate
 
-User confirmation is required before any skill file is created, updated, deleted, imported, installed, enabled, or materially rewritten.
+User confirmation is required before any skill file is created, updated, deleted, imported, installed, enabled, or materially rewritten. Draft first, ask second: never ask "should I add/update a skill?" until the proposed content or change is already written out for review.
 
 For `create`, show before writing:
 
@@ -92,8 +92,8 @@ For `create`, show before writing:
 - why the candidate passed the reusable-skill boundary
 - evidence level, recurrence signal, priority, and value signal
 - similar skills checked and why this is not a duplicate
-- complete proposed `SKILL.md` content or a concise preview plus offer to show the full content
-- any proposed `agents/openai.yaml`, scripts, references, or assets
+- complete proposed `SKILL.md` content
+- complete proposed `agents/openai.yaml` and every proposed script, reference, or asset text when such files are small enough to review inline; for large assets, show the exact file list, purpose, provenance, and generated diff or manifest
 
 For `improve` or `merge`, show before writing:
 
@@ -101,11 +101,11 @@ For `improve` or `merge`, show before writing:
 - decision type: `improve` or `merge`
 - why the change belongs in that existing skill
 - evidence level, recurrence signal, priority, and value signal
-- a concise diff or before/after summary of every changed section, especially frontmatter `description`, workflow, constraints, triggers, and resource references
-- any files that would be added, modified, or left untouched
+- a complete unified diff, or complete before/after text for every changed section when a unified diff is unavailable
+- every file that would be added, modified, deleted, or left untouched
 - validation plan or command to run after approval
 
-Ask for a clear yes/no approval before applying the change. If the user does not approve, do not edit the skill; report the candidate as deferred or discarded.
+Ask for a clear yes/no approval only after showing the full proposed artifact or diff. If the user does not approve, do not edit the skill; report the candidate as deferred or discarded.
 
 ## Immediate Triggers
 
@@ -400,7 +400,7 @@ Self-improvement can drift if the agent keeps rewriting from its own guesses. Us
 
 ## Acceptance Checks
 
-Before asking the user to approve a skill write, ensure it is self-contained, minimal, non-duplicative, confirmable, validatable, and privacy-safe. The user must be able to see the exact target path and diff or full proposed content.
+Before asking the user to approve a skill write, ensure it is self-contained, minimal, non-duplicative, confirmable, validatable, and privacy-safe. The user must see the exact target path plus the complete proposed skill content or complete diff before the approval question.
 
 ## Merge Procedure
 
