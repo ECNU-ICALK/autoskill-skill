@@ -29,6 +29,8 @@ npx skills add ECNU-ICALK/autoskill-skill --skill autoskill
 - Runs extraction checks at natural pauses, task boundaries, and session-end reviews.
 - Offers candidate skill titles, lets the user choose none, or accepts a custom
   topic before full extraction when the direction is ambiguous.
+- Rechecks the reusable-skill boundary and similar-skill search after a chosen
+  title or custom topic, so topic selection does not bypass quality gates.
 - Searches for similar skills before creating duplicates.
 - Chooses between discard, improve, merge, and create.
 - Fully drafts proposed skill contents or update diffs before asking for user
