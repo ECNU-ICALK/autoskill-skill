@@ -34,7 +34,9 @@ npx skills add ECNU-ICALK/autoskill-skill --skill autoskill
 - Preserves language consistency: Chinese source interactions produce Chinese
   skill drafts, English source interactions produce English drafts, and updates
   keep the target skill's dominant language.
-- Searches for similar skills before creating duplicates.
+- Searches local skills first, then uses external sources such as `npx skills
+  find <query>` and skills.sh when external discovery is requested or duplicate
+  risk is high.
 - Chooses between discard, improve, merge, and create.
 - Fully drafts proposed skill contents or update diffs before asking for user
   approval.
